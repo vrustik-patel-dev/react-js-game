@@ -1,0 +1,5 @@
+export const ADD_BOTCARDS = 'ADD_BOTCARDS';
+export const ADD_PLAYERCARDS = 'ADD_PLAYERCARDS';
+export const CHECK_BOTRES = 'CHECK_BOTRES';
+export const CHECK_PLAYERRES = 'CHECK_PLAYERRES';
+export const WINNER = 'WINNER';

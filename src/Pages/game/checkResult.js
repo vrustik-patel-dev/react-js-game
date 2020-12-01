@@ -35,13 +35,13 @@ const checkType = (cardsarr) =>{
         }
     }else if(cardsarr[1][0]===cardsarr[0][0]){
         console.log("Pair");
-        return [2,cardsarr[0][0],cardsarr[2][0]]
+        return [2,cards.get(cardsarr[0][0]),cards.get(cardsarr[2][0])]
     }else if( cardsarr[0][0]===cardsarr[2][0]){
         console.log("Pair");
-        return [2,cardsarr[0][0],cardsarr[1][0]];
+        return [2,cards.get(cardsarr[0][0]),cards.get(cardsarr[1][0])];
     }else if( cardsarr[1][0]===cardsarr[2][0]){
         console.log("Pair");
-        return [2,cardsarr[1][0],cardsarr[0][0]]
+        return [2,cards.get(cardsarr[1][0]),cards.get(cardsarr[0][0])]
         
     }else{
         let valarr = [];
