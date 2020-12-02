@@ -17,14 +17,13 @@ let cards = new Map([
 
 
 const checkType = (cardsarr) =>{
-
     if (cardsarr[0][0]===cardsarr[1][0] && cardsarr[0][0]===cardsarr[2][0]) {
         console.log("Trail");
         return [6,cards.get(cardsarr[0][0])];
     }
     else if (cardsarr[0][1]===cardsarr[1][1] && cardsarr[0][1]===cardsarr[2][1]) {
         let valarr = [];
-        cardsarr.map((card)=>{valarr.push(cards.get(card[0]))});
+        cardsarr.map((card)=>{valarr.push(cards.get(card[0]));return 0;});
         let [res,val] = checkseries(valarr);
         if(res){
             console.log("Pure Seq");
@@ -45,7 +44,7 @@ const checkType = (cardsarr) =>{
         
     }else{
         let valarr = [];
-        cardsarr.map((card)=>{valarr.push(cards.get(card[0]))});
+        cardsarr.map((card)=>{valarr.push(cards.get(card[0]));return 0;});
         let [res,val,vala,valb] = checkseries(valarr);
         if(res){
             console.log("Seq");

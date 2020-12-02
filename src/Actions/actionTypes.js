@@ -1,3 +1,4 @@
+export const SHUFFLE_DECK = 'SHUFFLE_DECK';
 export const ADD_BOTCARDS = 'ADD_BOTCARDS';
 export const ADD_PLAYERCARDS = 'ADD_PLAYERCARDS';
 export const CHECK_BOTRES = 'CHECK_BOTRES';

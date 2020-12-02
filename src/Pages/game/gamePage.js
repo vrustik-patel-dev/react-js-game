@@ -1,122 +1,79 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-import {addBotcards,addPlayercards,checkBotres,checkPlayerres,winner} from '../../Actions'
-import Checkresult from './checkResult';
+import { actions } from '../../Actions'
+import '../../Csss/game.css'
 
-const Game = ({gamestatus,addBotcards,addPlayercards,checkBotres,checkPlayerres,winner}) => {
+const delay = (ms) => new Promise(res => setTimeout(res, ms))
+
+const Game = ( {disp, gamestatus }) => {
     const [cardcall,setCardcall] = useState(true);
-    const [win,setWin]=useState('');
+    const [win,setWin]=useState('Loading...');
 
     useEffect(()=>{
         if(cardcall){
             setCardcall(false);
-            getCards();
+            disp(actions.shufflecard.trigger());
+            disp(actions.addBotcards.trigger());
+            tryit();
         }
     },[cardcall])
 
-    async function getCards(){
-        let shuffledeck = new Promise((resolve, reject) => {
-            axios.get(`https://deckofcardsapi.com/api/deck/${gamestatus.deckID}/shuffle/`)
-            .then(res=>{
-                console.log("Shuffled");
-                resolve()
-            })
-            .catch(err=>{
-                console.log("Error in Shuffle :",err);
-                alert("Server Error...! Please try again later");
-                reject()})
-        })
-    
-        await shuffledeck;
 
-        let getbotcards= new Promise((resolve, reject) => {
-            axios.get(`https://deckofcardsapi.com/api/deck/${gamestatus.deckID}/draw/`,{
-                params:{
-                    count: 3
-                }
-            })
-            .then(res=>{
-                console.log("Bot cards fetched");
-                let botselectedCards = [];
-    
-                res.data.cards.map((card)=>{
-                    botselectedCards.push([card.value,card.suit,card.image]);
-                    return 0;
-                })
-                addBotcards(botselectedCards);
-                let checkres = Checkresult(botselectedCards);
-                checkBotres(checkres);
-                resolve()
-            })
-            .catch(err=>{
-                console.log("Error in BOT cards :",err);
-                alert("Server Error...! Please try again later");
-                reject()})
-        })
-    
-        await getbotcards;
+    async function tryit() {
 
-        let getplayercards= new Promise((resolve, reject) => {
-            axios.get(`https://deckofcardsapi.com/api/deck/${gamestatus.deckID}/draw/`,{
-                params:{
-                    count: 3
-                }
-            })
-            .then(res=>{
-                console.log("Player cards fetched");
-                let playerselectedCards = [];
-    
-                res.data.cards.map((card)=>{
-                    playerselectedCards.push([card.value,card.suit,card.image]);
-                    return 0;
-                })
-    
-                addPlayercards(playerselectedCards);
-                let checkres = Checkresult(playerselectedCards);
-                checkPlayerres(checkres);
-                resolve()
-            })
-            .catch(err=>{
-                console.log("Error in Player cards :",err);
-                alert("Server Error...! Please try again later");
-                reject()})
-        })
-    
-        await getplayercards;
-        winner();
-        setWin(gamestatus.winner);
-        
-        console.log("Finished");
+        let checker = true;
+        let limit = 0;
+        while (checker) {
+            if(gamestatus.winner===''){
+                console.log("..");
+                await delay(1000);
+                limit++;
+            }else{
+                checker = false
+                setWin(gamestatus.winner);
+            }
+            if(limit>20){
+                checker=false;
+            }
+        }
+        console.log("Winner :",gamestatus.winner);
     }
 
-    return <>
-        <img src={gamestatus.botID} alt="BOT"/><h1>:</h1>
-        
+    if (gamestatus.botCards.length!==0){
+        if (gamestatus.playerCards.length!==0){
+            return <>
+    <div className="gameScreen">
+        <img className="botAvtar" src={gamestatus.botID} alt="BOT" /><br/>
+    
         {gamestatus.botCards.map((cd,i)=>{
-            return <img src={cd[2]} alt="card" key={i}/>
+            return <img className="cards" src={cd[2]} alt="card" key={i}/>
         })}
 
         <br/>
-        <h1>{win}</h1>
-        <h1>Your cards :</h1>
+        <div className="winnerdiv">
+            <h1 className="winner">{win}</h1>
+        </div>
+        <h1 className="yourlable">Your cards :</h1>
 
         {gamestatus.playerCards.map((cd,i)=>{
-            return <img src={cd[2]} alt="card" key={i}/>
+            return <img className="cards" src={cd[2]} alt="card" key={i}/>
         })}
-
-        <input type="button" value="Rematch" onClick={()=>getCards()}/>
+    </div>
         
     </>;
+        }
+    }
+
+    return<>
+        <div className="loadingScreen"><div className="loader"></div></div>
+    </>
+
+    
 }
 
 const mapDispatchToProps = dispatch => ({
-    addBotcards: cardarr => dispatch(addBotcards(cardarr)),
-    addPlayercards: cardarr => dispatch(addPlayercards(cardarr)),
-    checkBotres: res => dispatch(checkBotres(res)),
-    checkPlayerres: res => dispatch(checkPlayerres(res)),
-    winner: () => dispatch(winner())
+    disp: something => dispatch(something)
 })
 
 const mapStateToProps = state => ({

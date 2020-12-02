@@ -1,0 +1,16 @@
+:root {
+    --main-color : #222831;
+    --second-color : #393e46;
+    --third-color : #ffd369;
+    --fourth-color : #eeeeee;
+    --fifth-color : #f05454;
+}
+
+* {
+    font-family : 'Sansita Swashed', cursive;
+    text-align: center;
+}
+
+body {
+    background-color: var(--main-color);
+}

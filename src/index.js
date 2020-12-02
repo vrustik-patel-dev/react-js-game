@@ -5,6 +5,7 @@ import App from './App';
 import Welcomescreen from './Pages/welcome/welcome';
 import Game from './Pages/game';
 import reportWebVitals from './reportWebVitals';
+import './Csss/main.css'
 
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 

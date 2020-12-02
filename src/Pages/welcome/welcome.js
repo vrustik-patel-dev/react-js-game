@@ -3,6 +3,8 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 import { useHistory  } from 'react-router-dom';
 
+import '../../Csss/Welcomescreen.css'
+
 function findDeck() {
     let deckID = Cookies.get('localdeckid');
     let deckPromise = new Promise((suc,error)=>{
@@ -44,18 +46,18 @@ const Welcomepage = () => {
     if (!uname) {
         return (
             <div className="welcomepage">
-                <h1>Welcome to the Game</h1>
-                <label>Please Enter your name here : </label>
-                <input type="text" value={name} onChange={e=>cname(e.target.value)} />
-                <input type="button" value="Enter Game" onClick={()=>{useradd(name);history.push('/game');}} />
+                <h1 className="greetings">Welcome to the Game</h1>
+                <label className="wlcmlabel" >Please Enter your name here : </label>
+                <input className="wlcminput" type="text" value={name} placeholder="Enter Your name here" onChange={e=>cname(e.target.value)} />
+                <input className="wlcmbutton" type="button" value="Enter Game" onClick={()=>{useradd(name);history.push('/game');}} />
             </div>
         )
     }
 
     return (
         <div className="welcomepage">
-            <h1>Welcome back, {uname}</h1>
-            <input type="button" value="Enter Game" onClick={()=>{findDeck();history.push('/game');}} />
+            <h1 className="greetings">Welcome back, {uname}</h1>
+            <input className="wlcmbutton" type="button" value="Enter Game" onClick={()=>{findDeck();history.push('/game');}} />
         </div>
     )
 }
