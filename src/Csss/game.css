@@ -30,24 +30,46 @@
 }
 
 .botAvtar {
-    width: 150px;
+    width: 125px;
     margin: 20px;
 }
 
-.cards {
-    margin: 20px;
-    width : 200px;
+.cards0 {
+    width : 150px;
+    margin: 10px;
+    transform: rotate(-20deg);
+    position: relative;
+    bottom: 5px;
+    right: -150px    
+}
+
+.cards1 {
+    width : 150px;
+    margin: 10px;
+    transform: rotate(-10deg);
+    position: relative;
+    bottom: 0px;
+}
+.cards2 {
+    width : 150px;
+    margin: 10px;
+    position: relative;
+    bottom: -10px;
+    left: -150px
 }
 
 .yourlable {
     color: var(--fourth-color);
+    margin: 25px;
+    font-size: 25px;
     text-shadow: 5px 5px 10px var(--main-color);
 }
 
 .winnerdiv {
     background-color: var(--fifth-color);
-    padding: 10px;
+    padding: 5px;
     margin: auto;
+    margin-top: 50px;
     width: 40%;
     border-radius: 20px;
     box-shadow: 5px 5px 5px var(--main-color);
@@ -56,10 +78,12 @@
 
 @keyframes fadein {
     0% {opacity: 0;}
+    50%{opacity: 0;}
     100% {opacity: 1;}
  }
 
 .winner {
     color: var(--fourth-color);
+    font-size: 25px;
     text-shadow: 3px 3px 5px var(--third-color),-3px -3px 5px var(--main-color);
 }

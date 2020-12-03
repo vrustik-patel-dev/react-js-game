@@ -47,7 +47,7 @@ const Game = ( {disp, gamestatus }) => {
         <img className="botAvtar" src={gamestatus.botID} alt="BOT" /><br/>
     
         {gamestatus.botCards.map((cd,i)=>{
-            return <img className="cards" src={cd[2]} alt="card" key={i}/>
+            return <img className={`cards${i}`} src={cd[2]} alt="card" key={i}/>
         })}
 
         <br/>
@@ -57,7 +57,7 @@ const Game = ( {disp, gamestatus }) => {
         <h1 className="yourlable">Your cards :</h1>
 
         {gamestatus.playerCards.map((cd,i)=>{
-            return <img className="cards" src={cd[2]} alt="card" key={i}/>
+            return <img className={`cards${i}`} src={cd[2]} alt="card" key={i}/>
         })}
     </div>
         
