@@ -19,13 +19,12 @@ const Game = ( {disp, gamestatus }) => {
         }
     },[cardcall])
 
-
     async function tryit() {
 
         let checker = true;
         let limit = 0;
         while (checker) {
-            if(gamestatus.winner===''){
+            if(gamestatus.winner==='Loading...'){
                 console.log("..");
                 await delay(1000);
                 limit++;

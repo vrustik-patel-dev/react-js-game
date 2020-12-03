@@ -94,6 +94,9 @@ function* getPlayingCards(){
         console.log("Error :",error);
         yield put(actions.addPlayercards.failure("Failed to fetch"))
     }
+
+    // Dispatching winner action
+
     yield put(winner())
 }
 

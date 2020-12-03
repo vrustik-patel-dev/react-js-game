@@ -1,5 +1,5 @@
 
-import {actions} from '../Actions';
+import { actions } from '../Actions';
 
 var initialState = {
     deckStatus : 'never triggered',
@@ -8,8 +8,10 @@ var initialState = {
     botID : 'https://robohash.org/tempID',
     botRes:[],
     plrRes:[],
-    winner:'',
+    winner:'Loading...',
 }
+
+// Create random string to fetch random bot image from robohash.org
 
 let tempID = '';
 let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
